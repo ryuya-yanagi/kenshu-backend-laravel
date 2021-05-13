@@ -14,3 +14,11 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('users')->group(function () {
+    require __DIR__ . '/web/users.php';
+});
+
+Route::prefix('auth')->group(function () {
+    require __DIR__ . '/web/auth.php';
+});

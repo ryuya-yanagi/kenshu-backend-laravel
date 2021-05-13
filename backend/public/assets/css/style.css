@@ -1,0 +1,37 @@
+html,
+body {
+  background-color: #fff;
+  font-family: 'Nunito',
+  sans-serif;
+  font-weight: 200;
+  min-height: 100vh;
+  margin: 0;
+}
+
+ul {
+  list-style: none;
+}
+
+.w-200px {
+  max-width: 200px;
+}
+
+.w-300px {
+  max-width: 300px;
+}
+
+.w-600px {
+  max-width: 600px;
+}
+
+.h-100px {
+  max-height: 100px;
+}
+
+.h-200px {
+  max-height: 200px;
+}
+
+.h-400px {
+  max-height: 400px;
+}

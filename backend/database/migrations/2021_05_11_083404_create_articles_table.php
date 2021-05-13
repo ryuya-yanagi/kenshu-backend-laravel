@@ -16,8 +16,8 @@ class CreateArticlesTable extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->autoIncrement();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('thumbnail_id');
-            $table->string('title', 30);
+            $table->unsignedBigInteger('thumbnail_id')->nullable();
+            $table->string('title', 50);
             $table->text('body');
             $table->timestamps();
             $table->foreign('user_id')

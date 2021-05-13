@@ -1,12 +1,13 @@
 init:
 	docker-compose up -d --build
-	docker-compose exec kenshu-laravel composer install
+	@make composer
 	docker-compose exec kenshu-laravel cp .env.example .env
 	docker-compose exec kenshu-laravel php artisan key:generate
 	docker-compose exec kenshu-laravel php artisan storage:link
 	docker-compose exec kenshu-laravel chmod -R 777 storage bootstrap/cache
 	docker-compose exec kenshu-laravel npm ci
 	@make migrate
+	@make seed
 build:
 	docker-compose build
 up:
@@ -23,6 +24,18 @@ nginx:
 	docker exec -it kenshu-nginx ash
 mysql:
 	docker exec -it kenshu-mysql bash
+mysql-restart:
+	docker-compose down kenshu-mysql
+	docker-compose up -d kenshu-mysql
+composer:
+	docker-compose exec kenshu-laravel composer install
+autoload:
+	docker exec kenshu-laravel composer dump-autoload
+seed:
+	docker exec kenshu-laravel php artisan db:seed
+db-remove:
+	docker-compose down kenshu-mysql
+	rm -rf infra/mysql/data
 npm:
 	@make npm-install
 npm-install:
