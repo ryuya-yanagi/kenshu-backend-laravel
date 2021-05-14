@@ -6,8 +6,8 @@ use App\Domains\Entities\Article;
 
 interface ArticleRepository extends BaseRepository
 {
-    public function getList();
-    public function findById(int $id): ?array;
+    public function getList(): array;
+    public function findById(int $id): ?Article;
     public function create(Article $article): int;
     public function update(Article $article): int;
     public function updateThumbnailId(int $id, int $thumbnail_id): int;

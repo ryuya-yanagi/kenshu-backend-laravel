@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Domains\Repositories\ArticleRepository;
+use App\Domains\Repositories\AuthRepository;
 use App\Domains\Repositories\UserRepository;
 use App\Infrastructure\RepositoryImpl\Eloquent;
 use Illuminate\Support\ServiceProvider;
@@ -22,6 +23,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             ArticleRepository::class,
             Eloquent\ArticleRepositoryImpl::class
+        );
+
+        $this->app->bind(
+            AuthRepository::class,
+            Eloquent\AuthRepositoryImpl::class
         );
     }
 

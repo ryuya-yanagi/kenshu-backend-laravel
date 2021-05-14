@@ -15,10 +15,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/mypage', 'Auth\CurrentUserInfoController')->name('mypage');
+
 Route::prefix('users')->group(function () {
     require __DIR__ . '/web/users.php';
 });
 
 Route::prefix('auth')->group(function () {
     require __DIR__ . '/web/auth.php';
+});
+
+Route::prefix('articles')->group(function () {
+    require __DIR__ . '/web/articles.php';
 });

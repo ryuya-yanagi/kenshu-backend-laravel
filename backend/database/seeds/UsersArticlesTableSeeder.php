@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Article;
-use App\Models\User;
+use App\Infrastructure\DataAccess\Eloquent\Article;
+use App\Infrastructure\DataAccess\Eloquent\User;
 use Illuminate\Database\Seeder;
 
 class UsersArticlesTableSeeder extends Seeder

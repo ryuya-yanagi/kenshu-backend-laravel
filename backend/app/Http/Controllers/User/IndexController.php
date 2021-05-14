@@ -14,8 +14,8 @@ class IndexController extends Controller
      */
     public function __invoke(UserGetListUsecase $usecase)
     {
-        $result = $usecase->execute();
+        $users = $usecase->execute();
 
-        return view('users.index', ['users' => $result]);
+        return view('users.index', ['users' => $users]);
     }
 }

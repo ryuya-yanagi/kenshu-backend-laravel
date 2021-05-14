@@ -14,15 +14,23 @@
                 <div class="mb-3">
                     <label for="inputName" class="form-label">Name</label>
                     <input type="text" name="name" class="form-control" id="inputName" aria-describedby="nameHelp">
+                    @error('name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     <div id="nameHelp" class="form-text">between 4 and 50 characters</div>
                 </div>
                 <div class="mb-3">
                     <label for="inputPassword" class="form-label">Password</label>
                     <input type="password" name="password" class="form-control" id="inputPassword"
                         aria-describedby="passwordHelp">
+                    @error('password')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     <div id="passwordHelp" class="form-text">6 or more characters</div>
                 </div>
-                <button type="submit" class="btn btn-primary">Register</button>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
             </form>
         </div>
     </div>

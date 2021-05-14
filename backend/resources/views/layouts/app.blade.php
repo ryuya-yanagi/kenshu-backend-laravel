@@ -50,14 +50,24 @@
                         </li>
                     </ul>
                     <ul class="navbar-nav mb-2 mb-lg-0">
+                        @if (Auth::check())
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->is('/auth/login') ? 'active' : '' }}"
+                            <a class="nav-link {{ request()->is('articles/new') ? 'active' : '' }}"
+                                href="/articles/new">New Article</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('mypage') ? 'active' : '' }}" href="/mypage">MyPage</a>
+                        </li>
+                        @else
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('auth/login') ? 'active' : '' }}"
                                 href="/auth/login">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->is('/new') ? 'active' : '' }}"
+                            <a class="nav-link {{ request()->is('auth/register') ? 'active' : '' }}"
                                 href="/auth/register">SignUp</a>
                         </li>
+                        @endif
                     </ul>
                 </div>
             </div>

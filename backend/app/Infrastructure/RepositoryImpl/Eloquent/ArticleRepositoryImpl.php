@@ -5,9 +5,12 @@ namespace App\Infrastructure\RepositoryImpl\Eloquent;
 use App\Domains\Entities\Article as ArticleEntity;
 use App\Domains\Repositories\ArticleRepository;
 use App\Infrastructure\DataAccess\Eloquent\Article as ArticleEloquent;
+use App\Infrastructure\RepositoryImpl\Eloquent\Traits\ConvertibleArticleEntity;
 
 class ArticleRepositoryImpl extends BaseRepositoryImpl implements ArticleRepository
 {
+    use ConvertibleArticleEntity;
+
     private ArticleEloquent $articleEloquent;
 
     public function __construct(ArticleEloquent $articleEloquent)
@@ -15,19 +18,26 @@ class ArticleRepositoryImpl extends BaseRepositoryImpl implements ArticleReposit
         $this->articleEloquent = $articleEloquent;
     }
 
-    public function getList()
+    public function getList(): array
     {
-        return $this->articleEloquent->newQuery()->get();
+        $builder = $this->articleEloquent->newQuery();
+        $builder->with('user');
+        $result = $builder->get()->toArray();
+
+        return $this->toArticleEntityCollection($result);
     }
 
-    public function findById(int $articleId): ?array
+    public function findById(int $articleId): ?ArticleEntity
     {
-        $article = $this->articleEloquent->newQuery()->find($articleId);
-        if (!$article) {
+        $builder = $this->articleEloquent->newQuery();
+        $builder->with('user');
+        $result = $builder->find($articleId)->toArray();
+
+        if (!$result) {
             return null;
         }
 
-        return $article;
+        return $this->toArticleEntity($result);
     }
 
     public function create(ArticleEntity $article): int

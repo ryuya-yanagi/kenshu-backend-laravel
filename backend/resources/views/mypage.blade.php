@@ -1,16 +1,14 @@
 @extends('layouts.app')
 
-@section('title'){{ $user->name }}@endsection
+@section('title', 'MyPage')
 
 @section('content')
 <div class="py-5">
-    <h2>
-        {{ $user->name }}
-    </h2>
+    <h2>{{ $currentUser->name }}</h2>
     <hr />
-    @if (count($user->articles))
+    @if (count($currentUser->articles))
     <ul class="d-flex justify-content-center flex-wrap p-0">
-        @foreach ($user->articles as $article)
+        @foreach ($currentUser->articles as $article)
         <li class="card w-300px h-400px m-2">
             <div class="d-flex align-items-center overflow-hidden w-300px h-200px bg-light border-bottom">
                 @if (isset($article->thumbnail_url))

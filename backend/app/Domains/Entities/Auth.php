@@ -2,6 +2,8 @@
 
 namespace App\Domains\Entities;
 
+use RuntimeException;
+
 class Auth extends BaseEntity
 {
     private int $id;
@@ -90,6 +92,10 @@ class Auth extends BaseEntity
      */
     public function hash_pass()
     {
+        if (empty($this->password)) {
+            throw new RuntimeException("Password empty!");
+        }
+
         $this->password_hash = password_hash($this->password, PASSWORD_DEFAULT);
     }
 

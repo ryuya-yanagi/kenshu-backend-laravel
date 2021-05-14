@@ -1,11 +1,16 @@
 html,
 body {
   background-color: #fff;
+  color: #212529;
   font-family: 'Nunito',
   sans-serif;
   font-weight: 200;
   min-height: 100vh;
   margin: 0;
+}
+
+a {
+  color: inherit;
 }
 
 ul {

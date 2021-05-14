@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'ユーザー | 一覧')
+@section('title', 'Users')
 
 @section('content')
-<div class="pt-5">
+<div class="py-5">
     <ul class="list-group">
         @foreach ($users as $user)
         <li>

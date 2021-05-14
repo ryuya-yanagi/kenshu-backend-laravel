@@ -9,10 +9,9 @@ class Article extends BaseEntity
     private string $body;
     private int $thumbnail_id;
     private string $thumbnail_url;
-    private string $username;
-    private int $user_id;
     private array $photos = [];
     private array $tags = [];
+    private User $user;
 
     function __construct(?object $obj = null)
     {
@@ -25,31 +24,28 @@ class Article extends BaseEntity
 
             switch ($key) {
                 case "id":
-                    $this->setId($obj->$key);
+                    $this->setId($value);
                     break;
                 case "title":
-                    $this->setTitle($obj->$key);
+                    $this->setTitle($value);
                     break;
                 case "body":
-                    $this->setBody($obj->$key);
+                    $this->setBody($value);
                     break;
                 case "thumbnail_id":
-                    $this->setThumbnailId($obj->$key);
+                    $this->setThumbnailId($value);
                     break;
                 case "thumbnail_url":
-                    $this->setThumbnailUrl($obj->$key);
+                    $this->setThumbnailUrl($value);
                     break;
-                case "username":
-                    $this->setUsername($obj->$key);
-                    break;
-                case "user_id":
-                    $this->setUserId($obj->$key);
+                case "user":
+                    $this->setUser((object) $value);
                     break;
                 case "photos":
-                    $this->setPhotos($obj->$key);
+                    $this->setPhotos($value);
                     break;
                 case "tags":
-                    $this->setTags($obj->$key);
+                    $this->setTags($value);
                     break;
                 case "created_at":
                     $this->created_at = $value;
@@ -116,21 +112,9 @@ class Article extends BaseEntity
         $this->thumbnail_url = $thumbnail_url;
     }
 
-    public function setUsername(string $username)
+    public function setUser(object $obj)
     {
-        $this->username = $username;
-    }
-
-    public function setUserId($user_id)
-    {
-        if (!is_numeric($user_id)) {
-            $this->illegalAssignment("Article", "user_id", $user_id);
-        }
-
-        if (!is_int($user_id)) {
-            $user_id = (int) $user_id;
-        }
-        $this->user_id = $user_id;
+        $this->user = new User($obj);
     }
 
     public function setPhotos(array $photos)
