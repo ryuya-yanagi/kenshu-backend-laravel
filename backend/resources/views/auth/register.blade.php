@@ -3,7 +3,7 @@
 @section('title', 'Register')
 
 @section('content')
-<div class="pt-5">
+<div class="py-5">
     <div class="card w-600px m-auto">
         <div class="card-header">
             Register
@@ -13,20 +13,21 @@
                 @csrf
                 <div class="mb-3">
                     <label for="inputName" class="form-label">Name</label>
-                    <input type="text" name="name" class="form-control" id="inputName" aria-describedby="nameHelp">
+                    <input type="text" name="name" value="{{ old('name') }}" id="inputName" class="form-control"
+                        aria-describedby="nameHelp">
                     @error('name')
-                    <div class="alert alert-danger">{{ $message }}</div>
+                    <span class="form-text text-danger">{{ $message }}</span><br />
                     @enderror
-                    <div id="nameHelp" class="form-text">between 4 and 50 characters</div>
+                    <span id="nameHelp" class="form-text">between 4 and 50 characters</span>
                 </div>
                 <div class="mb-3">
                     <label for="inputPassword" class="form-label">Password</label>
-                    <input type="password" name="password" class="form-control" id="inputPassword"
+                    <input type="password" name="password" id="inputPassword" class="form-control"
                         aria-describedby="passwordHelp">
                     @error('password')
-                    <div class="alert alert-danger">{{ $message }}</div>
+                    <span class="form-text text-danger">{{ $message }}</span><br />
                     @enderror
-                    <div id="passwordHelp" class="form-text">6 or more characters</div>
+                    <span id="passwordHelp" class="form-text">6 or more characters</span>
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Register</button>

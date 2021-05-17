@@ -11,11 +11,8 @@
         @foreach ($currentUser->articles as $article)
         <li class="card w-300px h-400px m-2">
             <div class="d-flex align-items-center overflow-hidden w-300px h-200px bg-light border-bottom">
-                @if (isset($article->thumbnail_url))
-                <img src="{{ $article->thumbnail_url }}" class="card-img-top" alt="{{ $article->title }}" />
-                @else
-                <img src="/assets/img/text-only.png" class="card-img-top" alt="{{ $article->title }}" />
-                @endif
+                <img src="{{ $article->thumbnail->url ?? '/assets/img/text-only.png' }}" class="card-img-top"
+                    alt="{{ $article->title }}" />
             </div>
             <div class="card-body">
                 <h5 class="card-title">{{ $article->title }}</h5>

@@ -2,8 +2,10 @@
 
 namespace App\Domains\Repositories;
 
+use App\Domains\Entities\User;
+
 interface UserRepository extends BaseRepository
 {
-    public function getList();
-    public function findById(int $id);
+    public function getList(): array;
+    public function findById(int $id): ?User;
 }

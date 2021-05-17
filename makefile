@@ -24,6 +24,8 @@ nginx:
 	docker exec -it kenshu-nginx ash
 mysql:
 	docker exec -it kenshu-mysql bash
+mysql-logs:
+	docker exec kenshu-mysql tail -f /var/log/mysql/mysql-general.log
 mysql-restart:
 	docker-compose down kenshu-mysql
 	docker-compose up -d kenshu-mysql

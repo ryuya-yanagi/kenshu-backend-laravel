@@ -12,17 +12,14 @@
         <li class="card w-300px h-400px m-2">
             <a href="/articles/{{ $article->id }}">
                 <div class="d-flex align-items-center overflow-hidden w-300px h-200px bg-light border-bottom">
-                    @if (isset($article->thumbnail_url))
-                    <img src="{{ $article->thumbnail_url }}" class="card-img-top" alt="{{ $article->title }}" />
-                    @else
-                    <img src="/assets/img/text-only.png" class="card-img-top" alt="{{ $article->title }}" />
-                    @endif
+                    <img src="{{ $article->thumbnail->url ?? '/assets/img/text-only.png' }}" class="card-img-top"
+                        alt="{{ $article->title }}" />
                 </div>
             </a>
             <div class="card-body">
                 <h5 class="card-title"><a href="/articles/{{ $article->id }}">{{ $article->title }}</a></h5>
                 <p class="card-text h-100px overflow-hidden">{{ $article->body }}</p>
-                <hr />
+                <hr class="my-1" />
                 <a href="/users/{{ $article->user->id }}">{{ $article->user->name }}</a>
             </div>
         </li>

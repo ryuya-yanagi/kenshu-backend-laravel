@@ -3,7 +3,7 @@
 @section('title', 'Login')
 
 @section('content')
-<div class="pt-5">
+<div class="py-5">
     <div class="card w-600px m-auto">
         <div class="card-header">
             Login

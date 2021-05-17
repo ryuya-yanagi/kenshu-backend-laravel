@@ -15,6 +15,6 @@ class User extends BaseEloquent
      */
     public function articles(): HasMany
     {
-        return $this->hasMany(Article::class);
+        return $this->hasMany(Article::class)->orderBy('created_at', 'DESC');
     }
 }

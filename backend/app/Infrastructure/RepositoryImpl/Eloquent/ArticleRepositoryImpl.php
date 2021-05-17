@@ -22,7 +22,8 @@ class ArticleRepositoryImpl extends BaseRepositoryImpl implements ArticleReposit
     {
         $builder = $this->articleEloquent->newQuery();
         $builder->with('user');
-        $result = $builder->get()->toArray();
+        $builder->with('thumbnail');
+        $result = $builder->orderBy('created_at', 'DESC')->get()->toArray();
 
         return $this->toArticleEntityCollection($result);
     }
@@ -31,23 +32,25 @@ class ArticleRepositoryImpl extends BaseRepositoryImpl implements ArticleReposit
     {
         $builder = $this->articleEloquent->newQuery();
         $builder->with('user');
-        $result = $builder->find($articleId)->toArray();
+        $builder->with('photos');
+        $result = $builder->find($articleId);
 
         if (!$result) {
             return null;
         }
 
-        return $this->toArticleEntity($result);
+        return $this->toArticleEntity($result->toArray());
     }
 
-    public function create(ArticleEntity $article): int
+    public function create(ArticleEntity $article): ArticleEntity
     {
         $article = $this->articleEloquent->newQuery()->create([
+            'user_id' => $article->user_id,
             'title' => $article->title,
             'body' => $article->body
         ]);
 
-        return (int) $article->toArray()["id"];
+        return $this->toArticleEntity($article->toArray());
     }
 
     public function update(ArticleEntity $article): int

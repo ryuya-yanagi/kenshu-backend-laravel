@@ -24,6 +24,9 @@ class ShowController extends Controller
     public function __invoke(string $id, ArticleGetDetailUsecase $usecase)
     {
         $article = $usecase->execute((int) $id);
+        if (!$article) {
+            abort(404);
+        }
 
         return view('articles.id', ['article' => $article]);
     }

@@ -25,10 +25,10 @@ class UserRepositoryImpl extends BaseRepositoryImpl implements UserRepository
         return $this->toUserEntityCollection($result);
     }
 
-    public function findById(int $id): UserEntity
+    public function findById(int $id): ?UserEntity
     {
         $builder = $this->userEloquent->newQuery();
-        $builder->with('articles');
+        $builder->with('articles.thumbnail');
         $result = $builder->find($id);
         if (!$result) {
             return null;

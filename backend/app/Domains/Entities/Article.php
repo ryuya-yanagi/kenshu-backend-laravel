@@ -7,11 +7,12 @@ class Article extends BaseEntity
     private int $id;
     private string $title;
     private string $body;
+    private int $user_id;
     private int $thumbnail_id;
-    private string $thumbnail_url;
     private array $photos = [];
     private array $tags = [];
-    private User $user;
+    private ?User $user = null;
+    private ?Photo $thumbnail = null;
 
     function __construct(?object $obj = null)
     {
@@ -35,11 +36,14 @@ class Article extends BaseEntity
                 case "thumbnail_id":
                     $this->setThumbnailId($value);
                     break;
-                case "thumbnail_url":
-                    $this->setThumbnailUrl($value);
+                case "thumbnail":
+                    $this->setThumbnail((object) $value);
                     break;
                 case "user":
                     $this->setUser((object) $value);
+                    break;
+                case "user_id":
+                    $this->setUserId($value);
                     break;
                 case "photos":
                     $this->setPhotos($value);
@@ -107,9 +111,9 @@ class Article extends BaseEntity
         $this->thumbnail_id = $thumbnail_id;
     }
 
-    public function setThumbnailUrl(string $thumbnail_url)
+    public function setThumbnail(object $obj)
     {
-        $this->thumbnail_url = $thumbnail_url;
+        $this->thumbnail = new Photo($obj);
     }
 
     public function setUser(object $obj)
@@ -117,12 +121,26 @@ class Article extends BaseEntity
         $this->user = new User($obj);
     }
 
+    public function setUserId($user_id)
+    {
+        if (!is_numeric($user_id)) {
+            $this->illegalAssignment("Article", "user_id", $user_id);
+        }
+
+        if (!is_int($user_id)) {
+            $user_id = (int) $user_id;
+        }
+        $this->user_id = $user_id;
+    }
+
     public function setPhotos(array $photos)
     {
         if (!is_array($photos)) {
             $this->illegalAssignment("Article", "photos", $photos);
         }
-        $this->photos = $photos;
+        $this->photos = array_map(function ($photo) {
+            return new Photo((object) $photo);
+        }, $photos);
     }
 
     public function setTags(array $tags)
