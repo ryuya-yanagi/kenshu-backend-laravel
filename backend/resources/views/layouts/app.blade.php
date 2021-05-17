@@ -45,8 +45,8 @@
                             <a class="nav-link {{ request()->is('articles*') ? 'active' : '' }}"
                                 href="/articles">Articles</a>
                         </li>
-                        <li class="nav-item {{ request()->route()->named('tags*') ? 'active' : '' }}">
-                            <a class="nav-link" href="/tags">Tags</a>
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('tags*') ? 'active' : '' }}" href="/tags">Tags</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav mb-2 mb-lg-0">

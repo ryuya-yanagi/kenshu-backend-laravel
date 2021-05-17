@@ -18,10 +18,9 @@ trait ConvertibleArticleEntity
 
     protected function toArticleEntityCollection(array $array): array
     {
-        $articles = [];
-        foreach ($array as $record) {
-            array_push($articles, new Article((object) $record));
-        }
+        $articles = array_map(function ($record) {
+            return new Article((object) $record);
+        }, $array);
 
         return $articles;
     }

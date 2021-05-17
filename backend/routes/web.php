@@ -28,3 +28,7 @@ Route::prefix('auth')->group(function () {
 Route::prefix('articles')->group(function () {
     require __DIR__ . '/web/articles.php';
 });
+
+Route::prefix('tags')->group(function () {
+    require __DIR__ . '/web/tags.php';
+});

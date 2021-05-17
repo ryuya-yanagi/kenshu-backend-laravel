@@ -22,4 +22,9 @@ class Article extends BaseEloquent
     {
         return $this->hasOne(Photo::class, 'id', 'thumbnail_id');
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'articles_tags');
+    }
 }
