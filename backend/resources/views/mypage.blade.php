@@ -26,7 +26,13 @@
                         <a href="/articles/{{ $article->id }}/edit" class="btn btn-success">編集</a>
                     </li>
                     <li class="mx-1">
-                        <a href="/articles/{{ $article->id }}/delete" class="btn btn-danger">削除</a>
+                        <form action="/articles/{{ $article->id }}" id="form_{{ $article->id }}" method="post"
+                            style="display:inline">
+                            {{ csrf_field() }}
+                            {{ method_field('delete') }}
+                            <a href="#" data-id="{{ $article->id }}" onclick="deletePost(this);"
+                                class="btn btn-danger">削除</a>
+                        </form>
                     </li>
                 </ul>
             </div>
@@ -35,4 +41,16 @@
     </ul>
     @endif
 </div>
+
+//idをsubmitする
+<script>
+    function deletePost(e) {
+        'use strict';
+
+        if (confirm('are you sure?')) {
+            document.getElementById('form_' + e.dataset.id).submit();
+        }
+    }
+
+</script>
 @endsection

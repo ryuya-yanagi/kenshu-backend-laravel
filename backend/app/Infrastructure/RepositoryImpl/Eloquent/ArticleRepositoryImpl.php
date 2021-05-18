@@ -56,25 +56,25 @@ class ArticleRepositoryImpl extends BaseRepositoryImpl implements ArticleReposit
 
     public function update(ArticleEntity $article): int
     {
-        $article_id = $this->articleEloquent->newQuery()
+        $result = $this->articleEloquent->newQuery()
             ->whereKey($article->id)
             ->update([
                 'title' => $article->title,
                 'body' => $article->body
             ]);
 
-        return $article_id;
+        return $result;
     }
 
     public function updatethumbnailId(int $article_id, int $thumbnail_id): int
     {
-        $update_article_id = $this->articleEloquent->newQuery()
+        $result = $this->articleEloquent->newQuery()
             ->whereKey($article_id)
             ->update([
                 'thumbnail_id' => $thumbnail_id
             ]);
 
-        return $update_article_id;
+        return $result;
     }
 
     public function attachTag(int $article_id, int $tag_id)
@@ -86,10 +86,10 @@ class ArticleRepositoryImpl extends BaseRepositoryImpl implements ArticleReposit
 
     public function delete(int $article_id): int
     {
-        $article_id = $this->articleEloquent->newQuery()
+        $result = $this->articleEloquent->newQuery()
             ->whereKey($article_id)
             ->delete();
 
-        return $article_id;
+        return $result;
     }
 }
