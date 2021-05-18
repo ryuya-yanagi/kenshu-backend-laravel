@@ -42,7 +42,6 @@
     @endif
 </div>
 
-//idをsubmitする
 <script>
     function deletePost(e) {
         'use strict';
