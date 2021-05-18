@@ -17,6 +17,18 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $article->title }}</h5>
                 <p class="card-text h-100px overflow-hidden">{{ $article->body }}</p>
+                <hr class="my-3" />
+                <ul class="d-flex">
+                    <li class="mx-1">
+                        <a href="/articles/{{ $article->id }}" class="btn btn-secondary">詳細</a>
+                    </li>
+                    <li class="mx-1">
+                        <a href="/articles/{{ $article->id }}/edit" class="btn btn-success">編集</a>
+                    </li>
+                    <li class="mx-1">
+                        <a href="/articles/{{ $article->id }}/delete" class="btn btn-danger">削除</a>
+                    </li>
+                </ul>
             </div>
         </li>
         @endforeach

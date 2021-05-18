@@ -9,7 +9,7 @@
             Post Article
         </div>
         <div class="card-body">
-            <form action="/articles/new" method="POST" enctype="multipart/form-data">
+            <form action="/articles" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label for="inputTitle" class="form-label">Title</label>

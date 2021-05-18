@@ -61,7 +61,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'is_numeric($id)' => \App\Http\Middleware\AbortIfIdIsNotNumeric::class
+        'is_numeric($id)' => \App\Http\Middleware\AbortIfIdIsNotNumeric::class,
+        'check.permissions' => \App\Http\Middleware\AcceptUpdateArticle::class,
     ];
 
     /**
