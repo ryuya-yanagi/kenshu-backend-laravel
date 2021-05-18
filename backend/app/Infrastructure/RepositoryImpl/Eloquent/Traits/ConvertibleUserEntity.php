@@ -33,7 +33,7 @@ trait ConvertibleUserEntity
     protected function toUserEntityCollection(array $array): array
     {
         $users = array_map(function ($record) {
-            return new User((object) $record);
+            return new UserEntity((object) $record);
         }, $array);
 
         return $users;

@@ -27,16 +27,25 @@
                     @error('photos')
                     <span class="form-text text-danger">{{ $message }}</span><br />
                     @enderror
-                    <span id="photosHelp" class="form-text">optional</span>
+                    <span id="photosHelp" class="form-text">optional(multiple)</span>
                 </div>
                 <div class="mb-3">
                     <label for="inputBody" class="form-label">Body</label>
                     <textarea name="body" id="inputBody" class="form-control" rows="7" cols="33"
                         aria-describedby="bodyHelp">{{ old('body') }}</textarea>
                     @error('body')
-                    <span class="form_text text-danger">{{ $message }}</span><br />
+                    <span class="form-text text-danger">{{ $message }}</span><br />
                     @enderror
                     <span id="bodyHelp" class="form-text">between 1 and 200 characters</span>
+                </div>
+                <div class="mb-3">
+                    <label for="selectTag" class="form-label">Tag</label>
+                    <select class="form-select" id="selectTag" name="tags[]" multiple aria-label="multiple select">
+                        @foreach ($tags as $tag)
+                        <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                        @endforeach
+                    </select>
+                    <span class="form-text">optional(multiple)</span>
                 </div>
                 <div class="text-center">
                     <button type="submit" class="btn btn-primary">Post</button>

@@ -9,6 +9,7 @@ class CreateArticleDto extends BaseDto
     public int $user_id;
     public string $title;
     public string $body;
+    public array $tags;
     public array $files;
 
     public function __construct(array $array)

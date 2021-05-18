@@ -36,5 +36,12 @@
     <p>
         {{ $article->body }}
     </p>
+    <ul class="d-flex">
+        @foreach ($article->tags as $tag)
+        <li class="mx-1">
+            <a href="/tags/{{ $tag->id }}" class="btn btn-primary">#{{ $tag->name }}</a>
+        </li>
+        @endforeach
+    </ul>
 </div>
 @endsection

@@ -16,12 +16,6 @@ class UserGetDetailUsecase
 
     public function execute(int $id): ?User
     {
-        $user = $this->userRepository->findById($id);
-
-        if (!$user) {
-            return null;
-        }
-
-        return $user;
+        return $this->userRepository->findById($id);
     }
 }

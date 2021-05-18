@@ -148,6 +148,8 @@ class Article extends BaseEntity
         if (!is_array($tags)) {
             $this->illegalAssignment("Article", "tags", $tags);
         }
-        $this->tags = $tags;
+        $this->tags = array_map(function ($tag) {
+            return new Tag((object) $tag);
+        }, $tags);
     }
 }

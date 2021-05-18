@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class CreateController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * @param ArticleCreateUsecase
      */
@@ -19,7 +24,8 @@ class CreateController extends Controller
             'user_id' => Auth::id(),
             'title' => $request->title,
             'body' => $request->body,
-            'files' => $request->file('files'),
+            'tags' => $request->tags ?? [],
+            'files' => $request->file('files') ?? [],
         ]);
         $createArticleId = $usecase->execute($createArticleDto);
 

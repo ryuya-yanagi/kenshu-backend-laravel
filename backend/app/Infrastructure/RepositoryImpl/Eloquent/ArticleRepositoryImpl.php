@@ -28,12 +28,13 @@ class ArticleRepositoryImpl extends BaseRepositoryImpl implements ArticleReposit
         return $this->toArticleEntityCollection($result);
     }
 
-    public function findById(int $articleId): ?ArticleEntity
+    public function findById(int $article_id): ?ArticleEntity
     {
         $builder = $this->articleEloquent->newQuery();
         $builder->with('user');
         $builder->with('photos');
-        $result = $builder->find($articleId);
+        $builder->with('tags');
+        $result = $builder->find($article_id);
 
         if (!$result) {
             return null;
@@ -55,33 +56,40 @@ class ArticleRepositoryImpl extends BaseRepositoryImpl implements ArticleReposit
 
     public function update(ArticleEntity $article): int
     {
-        $articleId = $this->articleEloquent->newQuery()
+        $article_id = $this->articleEloquent->newQuery()
             ->whereKey($article->id)
             ->update([
                 'title' => $article->title,
                 'body' => $article->body
             ]);
 
-        return $articleId;
+        return $article_id;
     }
 
-    public function updateThumbnailId(int $articleId, int $thumbnailId): int
+    public function updatethumbnailId(int $article_id, int $thumbnail_id): int
     {
-        $articleId = $this->articleEloquent->newQuery()
-            ->whereKey($articleId)
+        $update_article_id = $this->articleEloquent->newQuery()
+            ->whereKey($article_id)
             ->update([
-                'thumbnail_id' => $thumbnailId
+                'thumbnail_id' => $thumbnail_id
             ]);
 
-        return $articleId;
+        return $update_article_id;
     }
 
-    public function delete(int $articleId): int
+    public function attachTag(int $article_id, int $tag_id)
     {
-        $articleId = $this->articleEloquent->newQuery()
-            ->whereKey($articleId)
+        $article = $this->articleEloquent->newQuery()
+            ->find($article_id);
+        $article->tags()->attach($tag_id);
+    }
+
+    public function delete(int $article_id): int
+    {
+        $article_id = $this->articleEloquent->newQuery()
+            ->whereKey($article_id)
             ->delete();
 
-        return $articleId;
+        return $article_id;
     }
 }
