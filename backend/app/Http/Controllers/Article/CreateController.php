@@ -17,6 +17,8 @@ class CreateController extends Controller
 
     /**
      * @param ArticleCreateUsecase
+     * 
+     * @return Response
      */
     public function __invoke(CreateArticleRequest $request, ArticleCreateUsecase $usecase)
     {

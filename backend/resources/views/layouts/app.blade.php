@@ -52,6 +52,10 @@
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         @if (Auth::check())
                         <li class="nav-item">
+                            <a class="nav-link {{ request()->is('tags/new') ? 'active' : '' }}" href="/tags/new">New
+                                Tag</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link {{ request()->is('articles/new') ? 'active' : '' }}"
                                 href="/articles/new">New Article</a>
                         </li>
