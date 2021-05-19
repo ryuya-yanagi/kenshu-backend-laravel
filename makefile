@@ -23,7 +23,7 @@ laravel:
 nginx:
 	docker exec -it kenshu-nginx ash
 mysql:
-	docker exec -it kenshu-mysql bash
+	docker exec -it kenshu-mysql bash -c 'mysql -u kenshu -ppassword'
 mysql-logs:
 	docker exec kenshu-mysql tail -f /var/log/mysql/mysql-general.log
 mysql-restart:
