@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Usecases\Tag;
+namespace App\Usecases\Tag;
 
 use App\Domains\Entities\Tag;
 use App\Domains\Repositories\TagRepository;

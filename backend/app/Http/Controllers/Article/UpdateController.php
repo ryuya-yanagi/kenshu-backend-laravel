@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Article;
 
-use App\Domains\Usecases\Article\ArticleUpdateUsecase;
+use App\Usecases\Article\ArticleUpdateUsecase;
 use App\Http\Controllers\Controller;
 use App\Http\Dto\Article\UpdateArticleDto;
 use App\Http\Requests\Article\UpdateArticleRequest;

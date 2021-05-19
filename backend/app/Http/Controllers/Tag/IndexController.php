@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Tag;
 
-use App\Domains\Usecases\Tag\TagGetListUsecase;
+use App\Usecases\Tag\TagGetListUsecase;
 use App\Http\Controllers\Controller;
 
 class IndexController extends Controller

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Usecases\User;
+namespace App\Usecases\User;
 
 use App\Domains\Repositories\UserRepository;
 

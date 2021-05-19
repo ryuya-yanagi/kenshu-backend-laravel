@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Domains\Usecases\User\UserGetDetailUsecase;
+use App\Usecases\User\UserGetDetailUsecase;
 use App\Http\Controllers\Controller;
 
 class ShowController extends Controller

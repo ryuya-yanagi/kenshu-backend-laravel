@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Tag;
 
-use App\Domains\Usecases\Tag\TagGetDetailUsecase;
+use App\Usecases\Tag\TagGetDetailUsecase;
 use App\Http\Controllers\Controller;
 
 class ShowController extends Controller

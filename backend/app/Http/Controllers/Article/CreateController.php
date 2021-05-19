@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Article;
 
-use App\Domains\Usecases\Article\ArticleCreateUsecase;
+use App\Usecases\Article\ArticleCreateUsecase;
 use App\Http\Controllers\Controller;
 use App\Http\Dto\Article\CreateArticleDto;
 use App\Http\Requests\Article\CreateArticleRequest;

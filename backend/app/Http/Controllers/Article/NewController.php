@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Article;
 
-use App\Domains\Usecases\Article\ArticleNewUsecase;
+use App\Usecases\Article\ArticleNewUsecase;
 use App\Http\Controllers\Controller;
 
 class NewController extends Controller

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Domains\Usecases\User\UserGetListUsecase;
+use App\Usecases\User\UserGetListUsecase;
 use App\Http\Controllers\Controller;
 
 class IndexController extends Controller

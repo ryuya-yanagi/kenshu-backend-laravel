@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domains\Usecases\Article;
+namespace App\Usecases\Article;
 
 use App\Domains\Repositories\ArticleRepository;
 
-class ArticleGetDetailUsecase
+class ArticleGetListUsecase
 {
     private ArticleRepository $articleRepository;
 
@@ -13,8 +13,8 @@ class ArticleGetDetailUsecase
         $this->articleRepository = $articleRepository;
     }
 
-    public function execute(int $id)
+    public function execute()
     {
-        return $this->articleRepository->findById($id);
+        return $this->articleRepository->getList();
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Article;
 
-use App\Domains\Usecases\Article\ArticleDeleteUsecase;
+use App\Usecases\Article\ArticleDeleteUsecase;
 use App\Http\Controllers\Controller;
 
 class DeleteController extends Controller

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Article;
 
-use App\Domains\Usecases\Article\ArticleGetDetailUsecase;
+use App\Usecases\Article\ArticleGetDetailUsecase;
 use App\Http\Controllers\Controller;
 
 class EditController extends Controller

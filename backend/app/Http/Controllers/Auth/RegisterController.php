@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Domains\Usecases\Auth\AuthRegisterUsecase;
+use App\Usecases\Auth\AuthRegisterUsecase;
 use App\Http\Controllers\Controller;
 use App\Http\Dto\Auth\CreateAuthDto;
 use App\Http\Requests\Auth\RegisterRequest;

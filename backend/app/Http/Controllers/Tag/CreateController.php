@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Tag;
 
-use App\Domains\Usecases\Tag\TagCreateUsecase;
+use App\Usecases\Tag\TagCreateUsecase;
 use App\Http\Controllers\Controller;
 use App\Http\Dto\Tag\CreateTagDto;
 use App\Http\Requests\Tag\CreateTagRequest;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domains\Usecases\Auth;
+namespace App\Usecases\Auth;
 
 use App\Domains\Entities\Auth;
 use App\Domains\Repositories\AuthRepository;

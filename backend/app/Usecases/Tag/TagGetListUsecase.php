@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Domains\Usecases\Tag;
+namespace App\Usecases\Tag;
 
-use App\Domains\Entities\Tag;
 use App\Domains\Repositories\TagRepository;
 
-class TagGetDetailUsecase
+class TagGetListUsecase
 {
     private TagRepository $tagRepository;
 
@@ -14,8 +13,8 @@ class TagGetDetailUsecase
         $this->tagRepository = $tagRepository;
     }
 
-    public function execute(int $id): ?Tag
+    public function execute()
     {
-        return $this->tagRepository->findById($id);
+        return $this->tagRepository->getList();
     }
 }

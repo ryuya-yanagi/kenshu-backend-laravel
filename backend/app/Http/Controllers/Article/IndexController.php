@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Article;
 
-use App\Domains\Usecases\Article\ArticleGetListUsecase;
+use App\Usecases\Article\ArticleGetListUsecase;
 use App\Http\Controllers\Controller;
 
 class IndexController extends Controller
