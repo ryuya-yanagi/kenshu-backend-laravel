@@ -28,7 +28,7 @@ class TagRepositoryImpl extends BaseRepositoryImpl implements TagRepository
     public function findById(int $id): ?TagEntity
     {
         $builder = $this->tagEloquent->newQuery();
-        $builder->with('articles');
+        $builder->with('articles.thumbnail');
         $result = $builder->find($id);
 
         if (!$result) {
