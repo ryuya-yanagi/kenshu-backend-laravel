@@ -46,3 +46,5 @@ npm-dev:
 	docker-compose exec kenshu-nginx npm run dev
 npm-watch:
 	docker-compose exec kenshu-nginx npm run watch
+test:
+	docker exec kenshu-laravel composer test
