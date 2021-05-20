@@ -4,11 +4,14 @@ namespace Tests\Unit\Http\Requests\Auth;
 
 use App\Http\Requests\Auth\RegisterRequest;
 use Faker;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Validation\Factory;
 use Tests\TestCase;
 
 class RegisterRequestTest extends TestCase
 {
+    use RefreshDatabase;
+
     protected Faker\Generator $faker;
     protected Factory $validationFactory;
     protected RegisterRequest $formRequest;
