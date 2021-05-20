@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit\Http\Requests\Auth;
+namespace Tests\Unit\Http\Requests\Tag;
 
 use App\Http\Requests\Tag\CreateRequest;
 use Faker;
