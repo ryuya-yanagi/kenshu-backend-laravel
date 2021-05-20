@@ -2,7 +2,6 @@
 
 namespace Tests\Unit\Infrastructure\DataAccess\Eloquent;
 
-use App\Domains\Entities\Article;
 use App\Infrastructure\DataAccess\Eloquent;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -40,7 +39,7 @@ class UserTest extends TestCase
     {
         $users = factory(Eloquent\User::class, 3)->create();
         $users->each(function (Eloquent\User $user) {
-            $user->articles()->saveMany(factory(Article::class, 10)->make());
+            $user->articles()->saveMany(factory(Eloquent\Article::class, 10)->make());
         });
 
         $user = (new Eloquent\User())->newQuery()->get()->random();

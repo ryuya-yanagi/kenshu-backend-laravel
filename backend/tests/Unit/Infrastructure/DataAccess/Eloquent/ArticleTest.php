@@ -10,9 +10,13 @@ class ArticleTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected Eloquent\User $user;
+
     public function setUp(): void
     {
         parent::setUp();
+
+        $this->user = factory(Eloquent\User::class)->create();
     }
 
     /**
@@ -22,7 +26,9 @@ class ArticleTest extends TestCase
      */
     public function testBootWhenDeletingArticleWithPhotosShouldDelete()
     {
-        $article = factory(Eloquent\Article::class)->create();
+        $article = factory(Eloquent\Article::class)->create([
+            'user_id' => $this->user->id,
+        ]);
         $article->photos()->saveMany(factory(Eloquent\Photo::class, 10)->make());
 
         $this->assertTrue($article->photos()->get()->isNotEmpty());
@@ -37,9 +43,11 @@ class ArticleTest extends TestCase
      */
     public function testPhotos()
     {
-        $articles = factory(Eloquent\Article::class, 3)->create();
+        $articles = factory(Eloquent\Article::class, 3)->create([
+            'user_id' => $this->user->id,
+        ]);
         $articles->each(function (Eloquent\Article $article) {
-            $article->photos()->saveMany(factory(Photo::class, 5)->make());
+            $article->photos()->saveMany(factory(Eloquent\Photo::class, 5)->make());
         });
 
         $article = (new Eloquent\article())->newQuery()->get()->random();

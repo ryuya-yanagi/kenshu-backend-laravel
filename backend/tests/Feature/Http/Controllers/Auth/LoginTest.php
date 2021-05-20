@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Auth;
+namespace Tests\Feature\Http\Controllers\Auth;
 
 use App\Infrastructure\DataAccess\Eloquent\Auth;
 use Illuminate\Foundation\Testing\RefreshDatabase;
