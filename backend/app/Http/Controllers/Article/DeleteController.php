@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Auth;
 class DeleteController extends Controller
 {
     /**
+     * 数字に変換できない文字列の排除のためのMiddlewareを登録
+     */
+    public function __construct()
+    {
+        $this->middleware('is_numeric($id)');
+    }
+
+    /**
      * @param string
      * @param ArticleUpdateUsecase
      * 
