@@ -9,7 +9,7 @@
     @if (count($articles))
     <ul class="d-flex justify-content-center flex-wrap p-0">
         @foreach ($articles as $article)
-        <li class="card w-300px h-400px m-2">
+        <li class="card w-300px m-2">
             <a href="/articles/{{ $article->id }}">
                 <div class="d-flex align-items-center overflow-hidden w-300px h-200px bg-light border-bottom">
                     <img src="{{ $article->thumbnail->url ?? '/assets/img/text-only.png' }}" class="card-img-top"

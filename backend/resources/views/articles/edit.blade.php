@@ -70,7 +70,7 @@
                     </ul>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Post</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
                 </div>
             </form>
         </div>
