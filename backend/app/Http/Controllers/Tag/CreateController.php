@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Tag;
 use App\Usecases\Tag\TagCreateUsecase;
 use App\Http\Controllers\Controller;
 use App\Http\Dto\Tag\CreateTagDto;
-use App\Http\Requests\Tag\CreateTagRequest;
+use App\Http\Requests\Tag\CreateRequest;
 
 class CreateController extends Controller
 {
@@ -15,11 +15,12 @@ class CreateController extends Controller
     }
 
     /**
+     * @param CreateRequest
      * @param TagCreateUsecase
      * 
      * @return Response
      */
-    public function __invoke(CreateTagRequest $request, TagCreateUsecase $usecase)
+    public function __invoke(CreateRequest $request, TagCreateUsecase $usecase)
     {
         $createTagDto = new CreateTagDto([
             'name' => $request->name,

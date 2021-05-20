@@ -10,6 +10,10 @@ class User extends BaseEloquent
         'password_hash',
     ];
 
+    protected $hidden = [
+        'password_hash',
+    ];
+
     /**
      * ユーザーの投稿した記事を取得
      */

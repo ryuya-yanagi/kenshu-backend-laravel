@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Article;
 use App\Usecases\Article\ArticleCreateUsecase;
 use App\Http\Controllers\Controller;
 use App\Http\Dto\Article\CreateArticleDto;
-use App\Http\Requests\Article\CreateArticleRequest;
+use App\Http\Requests\Article\CreateRequest;
 use Illuminate\Support\Facades\Auth;
 
 class CreateController extends Controller
@@ -20,7 +20,7 @@ class CreateController extends Controller
      * 
      * @return Response
      */
-    public function __invoke(CreateArticleRequest $request, ArticleCreateUsecase $usecase)
+    public function __invoke(CreateRequest $request, ArticleCreateUsecase $usecase)
     {
         $createArticleDto = new CreateArticleDto([
             'user_id' => Auth::id(),

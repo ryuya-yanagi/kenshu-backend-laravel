@@ -11,4 +11,4 @@ Route::middleware(['guest'])->group(function () {
 
 // コントローラー内で、guest middlewareを登録しているのでグループから排除
 Route::post('/register', 'Auth\RegisterController');
-Route::post('/login', 'Auth\LoginController');
+Route::post('/login', 'Auth\LoginController')->name('login');

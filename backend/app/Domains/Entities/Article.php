@@ -85,7 +85,7 @@ class Article extends BaseEntity
 
     public function setTitle(string $title)
     {
-        if (empty($title) || mb_strlen($title, "UTF-8") > 30) {
+        if (mb_strlen($title, "UTF-8") < 4 || mb_strlen($title, "UTF-8") > 50) {
             $this->illegalAssignment("Article", "title", $title);
         }
         $this->title = $title;

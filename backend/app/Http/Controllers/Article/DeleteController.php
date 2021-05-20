@@ -7,11 +7,6 @@ use App\Http\Controllers\Controller;
 
 class DeleteController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['check.permissions']);
-    }
-
     /**
      * @param ArticleUpdateUsecase
      * 
