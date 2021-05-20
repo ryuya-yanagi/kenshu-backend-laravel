@@ -1,7 +1,7 @@
 <?php
 
 Route::get('', 'Article\IndexController');
-Route::post('', 'Article\CreateController')->middleware('can:article.create');
+Route::post('', 'Article\CreateController')->middleware('auth');
 Route::get('/new', 'Article\NewController');
 Route::get('/{id}', 'Article\ShowController')->name('articles.id');
 Route::patch('/{id}', 'Article\UpdateController')->middleware('can:article.update,article');
