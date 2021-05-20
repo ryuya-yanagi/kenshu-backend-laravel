@@ -5,6 +5,8 @@ namespace App\Usecases\Article;
 use App\Domains\Entities\Article;
 use App\Domains\Repositories\ArticleRepository;
 use App\Http\Dto\Article\UpdateArticleDto;
+use App\Usecases\Exceptions\NotFoundException;
+use App\Usecases\Exceptions\PermissionException;
 
 class ArticleUpdateUsecase
 {
@@ -15,9 +17,19 @@ class ArticleUpdateUsecase
         $this->articleRepository = $articleRepository;
     }
 
-    public function execute(UpdateArticleDto $updateArticleDto): int
+    public function execute(int $user_id,  UpdateArticleDto $uad): int
     {
-        $updateArticle = new Article($updateArticleDto);
-        return $this->articleRepository->update($updateArticle);
+        $articleEntity = new Article($uad);
+
+        $article = $this->articleRepository->findById($articleEntity->id);
+        if (!$article) {
+            throw new NotFoundException();
+        }
+
+        if ($user_id !== $article->user_id) {
+            throw new PermissionException();
+        }
+
+        return $this->articleRepository->update($articleEntity);
     }
 }

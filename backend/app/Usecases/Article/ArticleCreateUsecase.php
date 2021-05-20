@@ -2,7 +2,6 @@
 
 namespace App\Usecases\Article;
 
-use App\Domains\Entities\Article;
 use App\Domains\Entities\Photo;
 use App\Domains\Repositories\ArticleRepository;
 use App\Domains\Repositories\PhotoRepository;
@@ -20,19 +19,18 @@ class ArticleCreateUsecase
         $this->photoRepository = $photoRepository;
     }
 
-    public function execute(CreateArticleDto $createArticleDto): int
+    public function execute(CreateArticleDto $cad): int
     {
         try {
             $this->articleRepository->beginTransaction();
 
             // 記事の登録
-            $createArticle = new Article($createArticleDto);
-            $article = $this->articleRepository->create($createArticle);
+            $article = $this->articleRepository->create($cad->user_id, $cad->title, $cad->body);
 
             // ファイル名をハッシュ化し、Photo Entityに変換
-            if (count($createArticleDto->files)) {
+            if (count($cad->files)) {
                 $photos = [];
-                foreach ($createArticleDto->files as $index => $e) {
+                foreach ($cad->files as $index => $e) {
                     $ext = $e['photo']->guessExtension();
                     $pathname = $e['photo']->getPathName();
                     $filename = $article->id . '/' . hash_file('md5', $pathname) . '.' . $ext;
@@ -48,8 +46,8 @@ class ArticleCreateUsecase
             }
 
             // タグの関連づけ
-            if (count($createArticleDto->tags)) {
-                foreach ($createArticleDto->tags as $tag_id) {
+            if (count($cad->tags)) {
+                foreach ($cad->tags as $tag_id) {
                     $this->articleRepository->attachTag($article->id, $tag_id);
                 }
             }

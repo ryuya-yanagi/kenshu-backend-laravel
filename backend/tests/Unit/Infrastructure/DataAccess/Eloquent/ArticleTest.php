@@ -39,7 +39,29 @@ class ArticleTest extends TestCase
     }
 
     /**
-     * @group article
+     * @group boot
+     * 
+     * @throws \Exception
+     */
+    public function testBootWhenDeleteingArticleWithTagRelationsShouldDelete()
+    {
+        $article = factory(Eloquent\Article::class)->create([
+            'user_id' => $this->user->id,
+        ]);
+
+        factory(Eloquent\Tag::class, 10)->create()->each(function (Eloquent\Tag $tag) use ($article) {
+            $article->tags()->attach($tag->id);
+        });
+
+        $this->assertTrue($article->tags()->get()->isNotEmpty());
+
+        $article->delete();
+
+        $this->assertTrue($article->tags()->get()->isEmpty());
+    }
+
+    /**
+     * @group photo
      */
     public function testPhotos()
     {

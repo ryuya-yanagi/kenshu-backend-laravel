@@ -7,11 +7,6 @@ use App\Http\Controllers\Controller;
 
 class NewController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * @param ArticleNewUsecase
      */

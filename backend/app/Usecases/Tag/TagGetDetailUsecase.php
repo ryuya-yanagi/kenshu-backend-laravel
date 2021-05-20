@@ -4,6 +4,7 @@ namespace App\Usecases\Tag;
 
 use App\Domains\Entities\Tag;
 use App\Domains\Repositories\TagRepository;
+use App\Usecases\Exceptions\NotFoundException;
 
 class TagGetDetailUsecase
 {
@@ -14,8 +15,13 @@ class TagGetDetailUsecase
         $this->tagRepository = $tagRepository;
     }
 
-    public function execute(int $id): ?Tag
+    public function execute(int $id): Tag
     {
-        return $this->tagRepository->findById($id);
+        $tag = $this->tagRepository->findById($id);
+        if (!$tag) {
+            throw new NotFoundException();
+        }
+
+        return $tag;
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Exceptions;
 
+use App\Usecases\Exceptions\NotFoundException;
+use App\Usecases\Exceptions\PermissionException;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
@@ -36,6 +38,14 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if ($exception instanceof PermissionException) {
+            abort(403, $exception->getMessage());
+        }
+
+        if ($exception instanceof NotFoundException) {
+            abort(404, $exception->getMessage());
+        }
+
         parent::report($exception);
     }
 

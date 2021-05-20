@@ -15,7 +15,7 @@ class Auth extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'password_hash',
+        'id', 'name', 'password_hash',
     ];
 
     /**

@@ -43,12 +43,12 @@ class ArticleRepositoryImpl extends BaseRepositoryImpl implements ArticleReposit
         return $this->toArticleEntity($result->toArray());
     }
 
-    public function create(ArticleEntity $article): ArticleEntity
+    public function create(int $user_id, string $title, string $body): ArticleEntity
     {
         $article = $this->articleEloquent->newQuery()->create([
-            'user_id' => $article->user_id,
-            'title' => $article->title,
-            'body' => $article->body
+            'user_id' => $user_id,
+            'title' => $title,
+            'body' => $body
         ]);
 
         return $this->toArticleEntity($article->toArray());

@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class CreateController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * @param ArticleCreateUsecase
      * 
@@ -23,12 +18,13 @@ class CreateController extends Controller
     public function __invoke(CreateRequest $request, ArticleCreateUsecase $usecase)
     {
         $createArticleDto = new CreateArticleDto([
-            'user_id' => Auth::id(),
+            'user_id' => (int) Auth::id(),
             'title' => $request->title,
             'body' => $request->body,
             'tags' => $request->tags ?? [],
             'files' => $request->file('files') ?? [],
         ]);
+
         $createArticleId = $usecase->execute($createArticleDto);
 
         return redirect(route('articles.id', [

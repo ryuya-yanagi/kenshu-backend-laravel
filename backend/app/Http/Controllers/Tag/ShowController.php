@@ -24,9 +24,6 @@ class ShowController extends Controller
     public function __invoke(string $id, TagGetDetailUsecase $usecase)
     {
         $tag = $usecase->execute((int) $id);
-        if (!$tag) {
-            abort(404);
-        }
 
         return view('tags.id', ['tag' => $tag]);
     }

@@ -6,7 +6,7 @@ use App\Domains\Repositories\ArticleRepository;
 use App\Usecases\Exceptions\NotFoundException;
 use App\Usecases\Exceptions\PermissionException;
 
-class ArticleDeleteUsecase
+class ArticleEditUsecase
 {
     private ArticleRepository $articleRepository;
 
@@ -26,6 +26,6 @@ class ArticleDeleteUsecase
             throw new PermissionException();
         }
 
-        return $this->articleRepository->delete($article_id);
+        return $article;
     }
 }

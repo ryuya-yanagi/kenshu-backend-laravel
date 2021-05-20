@@ -1,9 +1,16 @@
 <?php
 
 Route::get('', 'Article\IndexController');
-Route::post('', 'Article\CreateController')->middleware('auth');
-Route::get('/new', 'Article\NewController');
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::post('', 'Article\CreateController');
+    Route::get('/new', 'Article\NewController');
+    Route::get('/{id}/edit', 'Article\EditController')
+        ->name('edit');
+    Route::patch('/{id}', 'Article\UpdateController')
+        ->name('update');
+    Route::delete('/{id}', 'Article\DeleteController')
+        ->name('delete');
+});
+
 Route::get('/{id}', 'Article\ShowController')->name('articles.id');
-Route::patch('/{id}', 'Article\UpdateController')->middleware('can:article.update,article');
-Route::delete('/{id}', 'Article\DeleteController')->middleware('can:article.delete,article');
-Route::get('/{id}/edit', 'Article\EditController')->middleware('can:article.update,article');

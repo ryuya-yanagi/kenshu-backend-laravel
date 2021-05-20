@@ -4,21 +4,19 @@ namespace App\Http\Controllers\Article;
 
 use App\Usecases\Article\ArticleDeleteUsecase;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class DeleteController extends Controller
 {
     /**
+     * @param string
      * @param ArticleUpdateUsecase
      * 
      * @return Response
      */
     public function __invoke(string $id, ArticleDeleteUsecase $usecase)
     {
-        $result = $usecase->execute((int) $id);
-
-        if ($result === 0) {
-            abort(404);
-        }
+        $usecase->execute((int) Auth::id(), (int) $id);
 
         return redirect('/mypage');
     }

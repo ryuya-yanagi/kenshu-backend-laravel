@@ -5,7 +5,7 @@ namespace App\Infrastructure\DataAccess\Eloquent;
 class Article extends BaseEloquent
 {
     protected $fillable = [
-        'title', 'body', 'user_id'
+        'id', 'title', 'body', 'user_id'
     ];
 
     public function user()

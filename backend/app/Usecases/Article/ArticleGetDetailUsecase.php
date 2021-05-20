@@ -3,6 +3,7 @@
 namespace App\Usecases\Article;
 
 use App\Domains\Repositories\ArticleRepository;
+use App\Usecases\Exceptions\NotFoundException;
 
 class ArticleGetDetailUsecase
 {
@@ -15,6 +16,11 @@ class ArticleGetDetailUsecase
 
     public function execute(int $id)
     {
-        return $this->articleRepository->findById($id);
+        $article = $this->articleRepository->findById($id);
+        if (!$article) {
+            throw new NotFoundException();
+        }
+
+        return $article;
     }
 }
