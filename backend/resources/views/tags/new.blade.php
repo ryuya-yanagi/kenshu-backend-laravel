@@ -9,7 +9,7 @@
             New Tag
         </div>
         <div class="card-body">
-            <form action="/tags/new" method="POST">
+            <form action="/tags" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="inputName" class="form-label">Name</label>

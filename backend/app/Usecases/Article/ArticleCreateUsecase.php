@@ -2,6 +2,7 @@
 
 namespace App\Usecases\Article;
 
+use App\Domains\Entities\Article;
 use App\Domains\Entities\Photo;
 use App\Domains\Repositories\ArticleRepository;
 use App\Domains\Repositories\PhotoRepository;
@@ -25,7 +26,7 @@ class ArticleCreateUsecase
             $this->articleRepository->beginTransaction();
 
             // 記事の登録
-            $article = $this->articleRepository->create($cad->user_id, $cad->title, $cad->body);
+            $article = $this->articleRepository->create(new Article($cad));
 
             // ファイル名をハッシュ化し、Photo Entityに変換
             if (count($cad->files)) {

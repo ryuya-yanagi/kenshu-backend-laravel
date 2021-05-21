@@ -64,7 +64,7 @@ class Auth extends BaseEntity
 
     public function setName(string $name)
     {
-        if (mb_strlen($name, "UTF-8") < 2 && 15 < mb_strlen($name, "UTF-8")) {
+        if (mb_strlen($name, "UTF-8") < 4 || mb_strlen($name, "UTF-8") > 50) {
             $this->illegalAssignment("Auth", "name", $name);
         }
         $this->name = $name;

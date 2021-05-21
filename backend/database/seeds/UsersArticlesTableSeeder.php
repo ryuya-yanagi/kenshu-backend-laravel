@@ -1,7 +1,6 @@
 <?php
 
-use App\Infrastructure\DataAccess\Eloquent\Article;
-use App\Infrastructure\DataAccess\Eloquent\User;
+use App\Infrastructure\DataAccess\Eloquent;
 use Illuminate\Database\Seeder;
 
 class UsersArticlesTableSeeder extends Seeder
@@ -13,8 +12,8 @@ class UsersArticlesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(User::class, 10)->create()->each(function ($user) {
-            $user->articles()->saveMany(factory(Article::class, 10)->make());
+        factory(Eloquent\User::class, 10)->create()->each(function ($user) {
+            $user->articles()->saveMany(factory(Eloquent\Article::class, 10)->make());
         });
     }
 }

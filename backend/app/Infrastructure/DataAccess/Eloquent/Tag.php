@@ -8,6 +8,8 @@ class Tag extends BaseEloquent
         'name',
     ];
 
+    protected $hidden = array('pivot');
+
     public function articles()
     {
         return $this->belongsToMany(Article::class, 'articles_tags');

@@ -23,6 +23,8 @@
             <div class="card-body">
                 <h5 class="card-title">{{ $article->title }}</h5>
                 <p class="card-text h-100px overflow-hidden">{{ $article->body }}</p>
+                <hr class="my-1" />
+                <a href="/users/{{ $article->user->id }}">{{ $article->user->name }}</a>
             </div>
         </li>
         @endforeach

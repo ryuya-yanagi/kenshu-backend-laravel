@@ -72,11 +72,33 @@ class ArticleTest extends TestCase
             $article->photos()->saveMany(factory(Eloquent\Photo::class, 5)->make());
         });
 
-        $article = (new Eloquent\article())->newQuery()->get()->random();
+        $article = (new Eloquent\Article())->newQuery()->get()->random();
         $photos = $article->photos()->get();
 
         $photos->each(function (Eloquent\Photo $photo) use ($article) {
             $this->assertSame((int) $article->id, (int) $photo->article_id);
         });
+    }
+
+    /**
+     * @group tag
+     */
+    public function testTags()
+    {
+        $this->assertTrue((new Eloquent\Tag())->newQuery()->get()->isEmpty());
+
+        $article = factory(Eloquent\Article::class)->create([
+            'user_id' => $this->user->id,
+        ]);
+        factory(Eloquent\Tag::class, 3)->create()->each(function (Eloquent\Tag $tag) use ($article) {
+            $article->tags()->attach($tag->id);
+        });
+
+        $expectedTags = (new Eloquent\Tag())->newQuery()->get();
+
+        $findArticle = (new Eloquent\Article())->newQuery()->find($article->id);
+        $actualTags = $findArticle->tags()->get();
+
+        $this->assertEquals($expectedTags->toArray(), $actualTags->toArray());
     }
 }

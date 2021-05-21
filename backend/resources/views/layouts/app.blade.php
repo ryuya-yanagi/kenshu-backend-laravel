@@ -62,6 +62,9 @@
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('mypage') ? 'active' : '' }}" href="/mypage">MyPage</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/auth/logout">Logout</a>
+                        </li>
                         @else
                         <li class="nav-item">
                             <a class="nav-link {{ request()->is('auth/login') ? 'active' : '' }}"

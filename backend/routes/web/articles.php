@@ -1,16 +1,18 @@
 <?php
 
-Route::get('', 'Article\IndexController');
+Route::get('', 'Article\IndexController')->name('articles.index');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::post('', 'Article\CreateController');
-    Route::get('/new', 'Article\NewController');
+    Route::post('', 'Article\CreateController')
+        ->name('articles.create');
+    Route::get('/new', 'Article\NewController')
+        ->name('articles.new');
     Route::get('/{id}/edit', 'Article\EditController')
-        ->name('edit');
+        ->name('articles.edit');
     Route::patch('/{id}', 'Article\UpdateController')
-        ->name('update');
+        ->name('articles.update');
     Route::delete('/{id}', 'Article\DeleteController')
-        ->name('delete');
+        ->name('articles.delete');
 });
 
-Route::get('/{id}', 'Article\ShowController')->name('articles.id');
+Route::get('/{id}', 'Article\ShowController')->name('articles.show');

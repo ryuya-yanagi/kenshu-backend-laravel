@@ -58,7 +58,7 @@ class Tag extends BaseEntity
 
     public function setName(string $name)
     {
-        if (empty($name) || 15 < mb_strlen($name, "UTF-8")) {
+        if (mb_strlen($name, "UTF-8") < 4 || mb_strlen($name, "UTF-8") > 50) {
             $this->illegalAssignment("Tag", "name", $name);
         }
         $this->name = $name;

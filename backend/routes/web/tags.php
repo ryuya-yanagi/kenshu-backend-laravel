@@ -1,8 +1,12 @@
 <?php
 
-Route::get('', 'Tag\IndexController');
-Route::get('/new', function () {
-    return view('tags.new');
-})->middleware('auth');
-Route::post('/new', 'Tag\CreateController');
-Route::get('/{id}', 'Tag\ShowController')->name('tags.id');
+Route::get('', 'Tag\IndexController')->name('tags.index');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/new', function () {
+        return view('tags.new');
+    });
+    Route::post('', 'Tag\CreateController')->name('tags.create');
+});
+
+Route::get('/{id}', 'Tag\ShowController')->name('tags.show');

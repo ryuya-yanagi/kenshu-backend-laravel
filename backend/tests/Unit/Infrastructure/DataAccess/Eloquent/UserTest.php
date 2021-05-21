@@ -16,23 +16,6 @@ class UserTest extends TestCase
     }
 
     /**
-     * @group boot
-     * 
-     * @throws \Exception
-     */
-    public function testBootWhenDeletingUserWithArticlesShouldDelete()
-    {
-        $user = factory(Eloquent\User::class)->create();
-        $user->articles()->saveMany(factory(Eloquent\Article::class, 10)->make());
-
-        $this->assertTrue($user->articles()->get()->isNotEmpty());
-
-        $user->delete();
-
-        $this->assertTrue($user->articles()->get()->isEmpty());
-    }
-
-    /**
      * @group article
      */
     public function testArticles()
@@ -48,5 +31,17 @@ class UserTest extends TestCase
         $articles->each(function (Eloquent\Article $article) use ($user) {
             $this->assertSame((int) $user->id, (int) $article->user_id);
         });
+    }
+
+    /**
+     * @group security
+     */
+    public function testCanNotAccessPasswordHash()
+    {
+        $user = factory(Eloquent\User::class)->create();
+
+        $actualUser = (new Eloquent\User())->newQuery()->find($user->id)->toArray();
+
+        $this->assertFalse(array_key_exists('password_hash', $actualUser));
     }
 }

@@ -34,7 +34,7 @@ class UpdateController extends Controller
 
         $usecase->execute((int) Auth::id(), $updateArticleDto);
 
-        return redirect(route('articles.id', [
+        return redirect(route('articles.show', [
             'id' => $id
         ]));
     }

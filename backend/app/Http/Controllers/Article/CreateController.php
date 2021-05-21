@@ -27,7 +27,7 @@ class CreateController extends Controller
 
         $createArticleId = $usecase->execute($createArticleDto);
 
-        return redirect(route('articles.id', [
+        return redirect(route('articles.show', [
             'id' => $createArticleId
         ]));
     }

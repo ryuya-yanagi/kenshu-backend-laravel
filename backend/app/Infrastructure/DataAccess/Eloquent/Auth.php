@@ -18,15 +18,6 @@ class Auth extends Authenticatable
         'id', 'name', 'password_hash',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password_hash',
-    ];
-
     public function getAuthPassword()
     {
         return $this->password_hash;

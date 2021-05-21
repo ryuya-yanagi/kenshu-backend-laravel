@@ -7,14 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Dto\Auth\CreateAuthDto;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
-    use RegistersUsers;
-
-    protected $redirectTo = RouteServiceProvider::MYPAGE;
+    protected $redirectTo = RouteServiceProvider::LOGIN;
 
     public function __construct()
     {
@@ -29,6 +26,6 @@ class RegisterController extends Controller
         ]);
 
         $usecase->execute($createAuthDto);
-        return redirect($this->redirectPath());
+        return redirect($this->redirectTo);
     }
 }

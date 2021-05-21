@@ -20,7 +20,7 @@ class AuthRepositoryImpl extends BaseRepositoryImpl implements AuthRepository
 
     public function findUserByName(string $name): ?AuthEntity
     {
-        $result = $this->authEloquent->newQuery()->where('name', '=', $name)->get();
+        $result = $this->authEloquent->newQuery()->where('name', '=', $name)->first();
         if (!$result) {
             return null;
         }

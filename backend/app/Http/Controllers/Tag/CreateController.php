@@ -27,7 +27,7 @@ class CreateController extends Controller
         ]);
         $tagId = $usecase->execute($createTagDto);
 
-        return redirect(route('tags.id', [
+        return redirect(route('tags.show', [
             'id' => $tagId
         ]));
     }

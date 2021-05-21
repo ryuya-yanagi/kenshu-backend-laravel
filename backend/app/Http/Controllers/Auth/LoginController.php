@@ -34,7 +34,7 @@ class LoginController extends Controller
             return redirect()->intended('mypage');
         }
 
-        return view('/auth/login', ['unauthorized' => 'ログインに失敗しました']);
+        return response()->view('/auth/login', ['unauthorized' => 'ログインに失敗しました'], 401);
     }
 
     public function username()

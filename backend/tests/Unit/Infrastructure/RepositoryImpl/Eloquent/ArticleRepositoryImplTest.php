@@ -2,10 +2,10 @@
 
 namespace Tests\Unit\Infrastructure\RepositoryImpl\Eloquent;
 
-use Faker;
-use Mockery as m;
-use App\Infrastructure\DataAccess\Eloquent;
+use App\Domains\Entities;
 use App\Domains\Repositories;
+use Faker;
+use App\Infrastructure\DataAccess\Eloquent;
 use App\Infrastructure\RepositoryImpl\Eloquent\ArticleRepositoryImpl;
 use App\Infrastructure\RepositoryImpl\Eloquent\Traits\ConvertibleArticleEntity;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -92,12 +92,13 @@ class ArticleRepositoryImplTest extends TestCase
         $title = $this->faker->sentence(2);
         $body = $this->faker->text();
 
-        $articleEntity = $this->articleRepository->create($this->user->id, $title, $body);
+        $newArticleEntity = new Entities\Article((object) ["title" => $title, "body" => $body, "user_id" => $this->user->id]);
+        $actualArticleEntity = $this->articleRepository->create($newArticleEntity);
 
-        $article = (new Eloquent\Article())->newQuery()->find($articleEntity->id);
+        $article = (new Eloquent\Article())->newQuery()->find($actualArticleEntity->id);
         $expectedArticleEntity = $this->toArticleEntity($article->toArray());
 
-        $this->assertEquals($expectedArticleEntity, $articleEntity);
+        $this->assertEquals($expectedArticleEntity, $actualArticleEntity);
     }
 
     /**

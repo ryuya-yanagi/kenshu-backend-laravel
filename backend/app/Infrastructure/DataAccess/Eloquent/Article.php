@@ -8,6 +8,8 @@ class Article extends BaseEloquent
         'id', 'title', 'body', 'user_id'
     ];
 
+    protected $hidden = array('pivot');
+
     public function user()
     {
         return $this->belongsTo(User::class);
