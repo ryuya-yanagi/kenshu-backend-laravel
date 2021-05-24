@@ -13,7 +13,7 @@ RUN apk update && \
   gcc g++ make automake autoconf gettext libtool nasm bash openssl \
   nodejs nodejs-npm git
 
-RUN docker-php-ext-install intl pdo_mysql bcmath exif
+RUN docker-php-ext-install intl pdo_mysql bcmath exif gd
 
 COPY --from=composer:2.0 /usr/bin/composer /usr/bin/composer
 RUN composer config -g process-timeout 3600 && \
