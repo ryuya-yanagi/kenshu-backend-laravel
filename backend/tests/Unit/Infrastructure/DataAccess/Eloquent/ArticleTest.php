@@ -101,4 +101,10 @@ class ArticleTest extends TestCase
 
         $this->assertEquals($expectedTags->toArray(), $actualTags->toArray());
     }
+
+    public function tearDown(): void
+    {
+        (new Eloquent\Article())->newQuery()->delete();
+        parent::tearDown();
+    }
 }

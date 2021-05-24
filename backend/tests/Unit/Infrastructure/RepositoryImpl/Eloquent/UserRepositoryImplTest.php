@@ -3,7 +3,6 @@
 namespace Tests\Unit\Infrastructure\RepositoryImpl\Eloquent;
 
 use App\Domains\Repositories;
-use Faker;
 use App\Infrastructure\DataAccess\Eloquent;
 use App\Infrastructure\RepositoryImpl\Eloquent\Traits\ConvertibleUserEntity;
 use App\Infrastructure\RepositoryImpl\Eloquent\UserRepositoryImpl;
@@ -15,15 +14,7 @@ class UserRepositoryImplTest extends TestCase
     use RefreshDatabase;
     use ConvertibleUserEntity;
 
-    protected Faker\Generator $faker;
     protected Repositories\UserRepository $userRepository;
-
-    public function __construct($name = null, array $data = [], $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-
-        $this->faker = Faker\Factory::create();
-    }
 
     protected function setUp(): void
     {
@@ -51,9 +42,9 @@ class UserRepositoryImplTest extends TestCase
      */
     public function testFindByIdIfUserDoesntExist()
     {
-        $userId = 1;
+        $maxInc = (new Eloquent\User())->newQuery()->get()->count() + 1;
 
-        $user = $this->userRepository->findById($userId);
+        $user = $this->userRepository->findById($maxInc);
 
         $this->assertNull($user);
     }

@@ -57,9 +57,9 @@ class ArticleRepositoryImplTest extends TestCase
      */
     public function testFindByIdIfArticleDoesntExist()
     {
-        $articleId = 1;
+        $maxInc = (new Eloquent\Article())->newQuery()->get()->count() + 1;;
 
-        $article = $this->articleRepository->findById($articleId);
+        $article = $this->articleRepository->findById($maxInc);
 
         $this->assertNull($article);
     }
@@ -137,5 +137,11 @@ class ArticleRepositoryImplTest extends TestCase
 
         $this->assertNull((new Eloquent\Article())->newQuery()->find($article->id));
         $this->assertTrue($article->photos()->get()->isEmpty());
+    }
+
+    public function tearDown(): void
+    {
+        (new Eloquent\User())->newQuery()->delete();
+        parent::tearDown();
     }
 }

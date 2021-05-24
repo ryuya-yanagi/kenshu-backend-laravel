@@ -5,7 +5,6 @@ namespace Tests\Feature\Http\Controllers\Article;
 use App\Domains\Entities;
 use App\Infrastructure\DataAccess\Eloquent;
 use App\Infrastructure\RepositoryImpl\Eloquent\Traits\ConvertibleArticleEntity;
-use Faker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,17 +13,9 @@ class ShowControllerTest extends TestCase
     use RefreshDatabase;
     use ConvertibleArticleEntity;
 
-    protected Faker\Generator $faker;
     protected Entities\Article $articleEntity;
 
     protected string $uri;
-
-    public function __construct($name = null, array $data = [], $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-
-        $this->faker = Faker\Factory::create();
-    }
 
     public function setUp(): void
     {
@@ -69,5 +60,14 @@ class ShowControllerTest extends TestCase
         $response = $this->get($dummyUri);
 
         $response->assertNotFound();
+    }
+
+    public function tearDown(): void
+    {
+        (new Eloquent\Photo())->newQuery()->delete();
+        (new Eloquent\Article())->newQuery()->delete();
+        (new Eloquent\User())->newQuery()->delete();
+        (new Eloquent\Tag())->newQuery()->delete();
+        parent::tearDown();
     }
 }

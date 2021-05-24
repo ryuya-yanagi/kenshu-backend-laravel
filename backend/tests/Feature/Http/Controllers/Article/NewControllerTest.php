@@ -4,7 +4,6 @@ namespace Tests\Feature\Http\Controllers\Article;
 
 use App\Infrastructure\DataAccess\Eloquent;
 use App\Infrastructure\RepositoryImpl\Eloquent\Traits\ConvertibleTagEntity;
-use Faker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -13,19 +12,11 @@ class NewControllerTest extends TestCase
     use RefreshDatabase;
     use ConvertibleTagEntity;
 
-    protected Faker\Generator $faker;
     protected Eloquent\Auth $auth;
     protected array $tagEntityCollections;
 
     protected string $uri;
     protected string $viewUri;
-
-    public function __construct($name = null, array $data = [], $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-
-        $this->faker = Faker\Factory::create();
-    }
 
     public function setUp(): void
     {
@@ -53,5 +44,12 @@ class NewControllerTest extends TestCase
         $response = $this->get($this->uri);
 
         $response->assertRedirect(route('login'));
+    }
+
+    public function tearDown(): void
+    {
+        (new Eloquent\Auth())->newQuery()->delete();
+        (new Eloquent\Tag())->newQuery()->delete();
+        parent::tearDown();
     }
 }
