@@ -15,6 +15,8 @@ RUN apk update && \
 
 RUN docker-php-ext-install intl pdo_mysql bcmath exif gd
 
+RUN pecl install --force xdebug-2.9.8 && docker-php-ext-enable xdebug
+
 COPY --from=composer:2.0 /usr/bin/composer /usr/bin/composer
 RUN composer config -g process-timeout 3600 && \
   composer config -g repos.packagist composer https://packagist.org

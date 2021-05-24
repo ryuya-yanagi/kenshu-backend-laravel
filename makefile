@@ -51,3 +51,5 @@ npm-watch:
 	docker-compose exec kenshu-nginx npm run watch
 test:
 	docker exec kenshu-laravel composer test
+test-coverage:
+	docker exec kenshu-laravel ./vendor/bin/phpunit --verbose --coverage-html tests-coverage
