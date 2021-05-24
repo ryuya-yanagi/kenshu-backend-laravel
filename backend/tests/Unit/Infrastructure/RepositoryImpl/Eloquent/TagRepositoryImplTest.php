@@ -52,9 +52,9 @@ class TagRepositoryImplTest extends TestCase
      */
     public function testFindByIdIfTagDoesntExist()
     {
-        $tagId = 1;
+        $maxInc = (new Eloquent\Tag())->newQuery()->get()->count() + 1;
 
-        $tag = $this->tagRepository->findById($tagId);
+        $tag = $this->tagRepository->findById($maxInc);
 
         $this->assertNull($tag);
     }

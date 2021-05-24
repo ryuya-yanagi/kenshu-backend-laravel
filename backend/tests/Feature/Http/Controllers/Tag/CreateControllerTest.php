@@ -46,4 +46,10 @@ class CreateControllerTest extends TestCase
 
         $response->assertRedirect($redirectUri);
     }
+
+    public function tearDown(): void
+    {
+        (new Eloquent\Auth())->newQuery()->delete();
+        parent::tearDown();
+    }
 }

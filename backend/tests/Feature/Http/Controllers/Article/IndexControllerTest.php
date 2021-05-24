@@ -4,7 +4,6 @@ namespace Tests\Feature\Http\Controllers\Article;
 
 use App\Infrastructure\DataAccess\Eloquent;
 use App\Infrastructure\RepositoryImpl\Eloquent\Traits\ConvertibleArticleEntity;
-use Faker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -13,18 +12,10 @@ class IndexControllerTest extends TestCase
     use RefreshDatabase;
     use ConvertibleArticleEntity;
 
-    protected Faker\Generator $faker;
     protected Eloquent\User $user;
     protected array $articleEntityCollection;
 
     protected string $uri;
-
-    public function __construct($name = null, array $data = [], $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-
-        $this->faker = Faker\Factory::create();
-    }
 
     public function setUp(): void
     {
@@ -53,5 +44,12 @@ class IndexControllerTest extends TestCase
 
         $response->assertOk();
         $response->assertViewHas('articles', $this->articleEntityCollection);
+    }
+
+    public function tearDown(): void
+    {
+        (new Eloquent\User())->newQuery()->delete();
+        (new Eloquent\Article())->newQuery()->delete();
+        parent::tearDown();
     }
 }

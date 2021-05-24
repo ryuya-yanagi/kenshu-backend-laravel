@@ -80,4 +80,11 @@ class PhotoRepositoryImplTest extends TestCase
 
         $this->assertSame($expectedCount, $actualCount);
     }
+
+    public function tearDown(): void
+    {
+        (new Eloquent\Article())->newQuery()->delete();
+        (new Eloquent\User())->newQuery()->delete();
+        parent::tearDown();
+    }
 }

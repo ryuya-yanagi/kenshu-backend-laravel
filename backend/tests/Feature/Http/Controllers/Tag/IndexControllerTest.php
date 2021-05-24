@@ -4,7 +4,6 @@ namespace Tests\Feature\Http\Controllers\Tag;
 
 use App\Infrastructure\DataAccess\Eloquent;
 use App\Infrastructure\RepositoryImpl\Eloquent\Traits\ConvertibleTagEntity;
-use Faker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -13,17 +12,9 @@ class IndexControllerTest extends TestCase
     use RefreshDatabase;
     use ConvertibleTagEntity;
 
-    protected Faker\Generator $faker;
     protected array $tagEntityCollection;
 
     protected string $uri;
-
-    public function __construct($name = null, array $data = [], $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-
-        $this->faker = Faker\Factory::create();
-    }
 
     public function setUp(): void
     {
@@ -42,5 +33,11 @@ class IndexControllerTest extends TestCase
 
         $response->assertOk();
         $response->assertViewHas('tags', $this->tagEntityCollection);
+    }
+
+    public function tearDown(): void
+    {
+        (new Eloquent\Tag())->newQuery()->delete();
+        parent::tearDown();
     }
 }

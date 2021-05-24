@@ -71,4 +71,11 @@ class UpdateControllerTest extends TestCase
 
         $response->assertForbidden();
     }
+
+    public function tearDown(): void
+    {
+        (new Eloquent\Article())->newQuery()->delete();
+        (new Eloquent\User())->newQuery()->delete();
+        parent::tearDown();
+    }
 }

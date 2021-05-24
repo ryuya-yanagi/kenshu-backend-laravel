@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers\Auth;
 
-use App\Infrastructure\DataAccess\Eloquent\Auth;
+use App\Infrastructure\DataAccess\Eloquent;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
@@ -11,16 +11,11 @@ class RegisterControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected Auth $auth;
+    protected Eloquent\Auth $auth;
 
     protected string $uri;
     protected string $redirectUri;
     protected array $data;
-
-    public function __construct($name = null, array $data = [], $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-    }
 
     public function setUp(): void
     {
@@ -31,7 +26,7 @@ class RegisterControllerTest extends TestCase
             'password' => 'password',
         ];
 
-        $this->auth = Auth::create(['name' => $this->data['name'], 'password_hash' => Hash::make($this->data['password'])]);
+        $this->auth = Eloquent\Auth::create(['name' => $this->data['name'], 'password_hash' => Hash::make($this->data['password'])]);
 
         $this->uri = route('register');
     }
@@ -49,5 +44,11 @@ class RegisterControllerTest extends TestCase
             ->post($this->uri, $this->data);
 
         $response->assertRedirect(route('mypage'));
+    }
+
+    public function tearDown(): void
+    {
+        (new Eloquent\Auth())->newQuery()->delete();
+        parent::tearDown();
     }
 }

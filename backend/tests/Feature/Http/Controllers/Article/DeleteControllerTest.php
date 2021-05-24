@@ -3,7 +3,6 @@
 namespace Tests\Feature\Http\Controllers\Article;
 
 use App\Infrastructure\DataAccess\Eloquent;
-use Faker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -11,19 +10,11 @@ class DeleteControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected Faker\Generator $faker;
     protected Eloquent\Auth $auth;
     protected Eloquent\Article $article;
 
     protected string $uri;
     protected string $redirectUri;
-
-    public function __construct($name = null, array $data = [], $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-
-        $this->faker = Faker\Factory::create();
-    }
 
     public function setUp(): void
     {
@@ -54,5 +45,12 @@ class DeleteControllerTest extends TestCase
             ->delete($this->uri);
 
         $response->assertForbidden();
+    }
+
+    public function tearDown(): void
+    {
+        (new Eloquent\Article())->newQuery()->delete();
+        (new Eloquent\Auth())->newQuery()->delete();
+        parent::tearDown();
     }
 }

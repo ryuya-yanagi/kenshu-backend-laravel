@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers\Auth;
 
-use App\Infrastructure\DataAccess\Eloquent\Auth;
+use App\Infrastructure\DataAccess\Eloquent;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
@@ -11,16 +11,11 @@ class LoginControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected Auth $auth;
+    protected Eloquent\Auth $auth;
 
     protected string $uri;
     protected string $redirectUri;
     protected array $data;
-
-    public function __construct($name = null, array $data = [], $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-    }
 
     public function setUp(): void
     {
@@ -31,7 +26,7 @@ class LoginControllerTest extends TestCase
             'password' => 'password',
         ];
 
-        $this->auth = Auth::create(['name' => $this->data['name'], 'password_hash' => Hash::make($this->data['password'])]);
+        $this->auth = Eloquent\Auth::create(['name' => $this->data['name'], 'password_hash' => Hash::make($this->data['password'])]);
 
         $this->uri = route('login');
         $this->redirectUri = route('mypage');
@@ -63,5 +58,11 @@ class LoginControllerTest extends TestCase
 
         $response->assertUnauthorized();
         $response->assertViewHas('unauthorized', 'ログインに失敗しました');
+    }
+
+    public function tearDown(): void
+    {
+        (new Eloquent\Auth())->newQuery()->delete();
+        parent::tearDown();
     }
 }

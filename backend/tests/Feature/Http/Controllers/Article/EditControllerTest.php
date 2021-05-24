@@ -5,7 +5,6 @@ namespace Tests\Feature\Http\Controllers\Article;
 use App\Domains\Entities;
 use App\Infrastructure\DataAccess\Eloquent;
 use App\Infrastructure\RepositoryImpl\Eloquent\Traits\ConvertibleArticleEntity;
-use Faker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,18 +13,10 @@ class EditControllerTest extends TestCase
     use RefreshDatabase;
     use ConvertibleArticleEntity;
 
-    protected Faker\Generator $faker;
     protected Eloquent\Auth $auth;
     protected Entities\Article $articleEntity;
 
     protected string $uri;
-
-    public function __construct($name = null, array $data = [], $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-
-        $this->faker = Faker\Factory::create();
-    }
 
     public function setUp(): void
     {
@@ -61,5 +52,12 @@ class EditControllerTest extends TestCase
             ->get($this->uri);
 
         $response->assertForbidden();
+    }
+
+    public function tearDown(): void
+    {
+        (new Eloquent\Article())->delete();
+        (new Eloquent\Auth())->delete();
+        parent::tearDown();
     }
 }

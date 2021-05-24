@@ -5,7 +5,6 @@ namespace Tests\Feature\Http\Controllers\User;
 use App\Domains\Entities;
 use App\Infrastructure\DataAccess\Eloquent;
 use App\Infrastructure\RepositoryImpl\Eloquent\Traits\ConvertibleUserEntity;
-use Faker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -14,17 +13,9 @@ class ShowControllerTest extends TestCase
     use RefreshDatabase;
     use ConvertibleUserEntity;
 
-    protected Faker\Generator $faker;
     protected Entities\User $userEntity;
 
     protected string $uri;
-
-    public function __construct($name = null, array $data = [], $dataName = '')
-    {
-        parent::__construct($name, $data, $dataName);
-
-        $this->faker = Faker\Factory::create();
-    }
 
     public function setUp(): void
     {
@@ -58,5 +49,12 @@ class ShowControllerTest extends TestCase
         $response = $this->get($dummyUri);
 
         $response->assertNotFound();
+    }
+
+    public function tearDown(): void
+    {
+        (new Eloquent\Article())->newQuery()->delete();
+        (new Eloquent\User())->newQuery()->delete();
+        parent::tearDown();
     }
 }
