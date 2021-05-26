@@ -3,7 +3,7 @@ on:
   push:
     branches: [ main ]
     paths:
-      - "backend/*"
+      - "backend/database/migrations"
 
 env:
   SECRET_KEY: ${{ secrets.SECRET_KEY }}
@@ -25,4 +25,4 @@ jobs:
 
     - name: Deploy
       run: |
-        ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${EC2_USER}@${EC2_HOST} -i secret_key "sh ~/github-actions-sh/deploy.sh"
+        ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${EC2_USER}@${EC2_HOST} -i secret_key "sh ~/github-actions-sh/migrate.sh"
