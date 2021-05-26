@@ -22,4 +22,5 @@ jobs:
 
     - name: Deploy
       run: |
+        echo ${EC2_USER}
         ssh ${EC2_USER}@${EC2_HOST} -i secret_key
