@@ -22,5 +22,4 @@ jobs:
 
     - name: Deploy
       run: |
-        echo $EC2_USER
-        ssh ${EC2_USER}@${EC2_HOST} -i secret_key
+        ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null ${EC2_USER}@${EC2_HOST} -i secret_key "cd ~/kenshu-backend-laravel && git pull && sudo cp -r /home/ubuntu/kenshu-backend-laravel/backend/* /var/www/html"
