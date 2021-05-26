@@ -3,16 +3,17 @@ on:
   push:
     branches: [ main, github-actions ]
 
+env:
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
+  EC2_USER: ${{ secrets.EC2_USER }}
+  EC2_HOST: ${{ secrets.EC2_HOST }}
+
 jobs:
   deploy:
     runs-on: ubuntu-20.04
 
     steps:
     - name: Output SECRET_KEY
-      env:
-        SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        EC2_USER: ${{ secrets.EC2_USER }}
-        EC2_HOST: ${{ secrets.EC2_HOST }}
       run: |
         echo $SECRET_KEY > secret_key
         
