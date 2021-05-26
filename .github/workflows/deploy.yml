@@ -16,4 +16,4 @@ jobs:
       run:
         echo "$SECRET_KEY" > secret_key
         chmod 600 secret_key
-        ssh -o StrictHostKeyChecking=no -i secret_key ${EC2_USER}@${EC2_HOST} "sh ~/deploy.sh"
+        ssh -o StrictHostKeyChecking=no -i secret_key ${EC2_USER}@${EC2_HOST} `cd ~/kenshu-backend-laravel && git pull && sudo cp -r /home/ubuntu/kenshu-backend-laravel/backend/* /var/www/html`
