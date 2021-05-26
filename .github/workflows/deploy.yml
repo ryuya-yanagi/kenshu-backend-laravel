@@ -3,15 +3,24 @@ on:
   push:
     branches: [ main ]
 
+env:
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
+  EC2_USER: ${{ secrets.EC2_USER }}
+  EC2_HOST: ${{ secrets.EC2_HOST }}
+
 jobs:
   deploy:
     runs-on: ubuntu-20.04
 
     steps:
-    - name: connect & deploy
-      env:
-        SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        EC2_USER: ${{ secrets.EC2_USER }}
-        EC2_HOST: ${{ secrets.EC2_HOST }}
+    - name: Output SECRET_KEY
       run: |
         echo $SECRET_KEY > secret_key
+        
+    - name: Change permission
+      run: |
+        chmod 600 secret_key
+
+    - name: Deploy
+      run: |
+        ssh -o StrictHostKeyChecking=no -i secret_key ${EC2_USER}@${EC2_HOST} "cd ~/kenshu-backend-laravel && git pull && sudo cp -r /home/ubuntu/kenshu-backend-laravel/backend/* /var/www/html"
