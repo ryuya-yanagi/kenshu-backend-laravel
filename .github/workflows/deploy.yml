@@ -22,4 +22,4 @@ jobs:
 
     - name: Deploy
       run: |
-        ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${EC2_USER}@${EC2_HOST} -i secret_key
+        ssh ${EC2_USER}@${EC2_HOST} -i secret_key
