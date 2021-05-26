@@ -46,6 +46,10 @@ class Handler extends ExceptionHandler
             abort(404, $exception->getMessage());
         }
 
+        if (config('app.env') == 'production') {
+            abort(500);
+        }
+
         parent::report($exception);
     }
 
