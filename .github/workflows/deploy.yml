@@ -14,6 +14,13 @@ jobs:
         EC2_USER: ${{ secrets.EC2_USER }}
         EC2_HOST: ${{ secrets.EC2_HOST }}
       run: |
-        echo $SECRET_KEY > secret_key &&
-        chmod 600 secret_key &&
+        echo $SECRET_KEY > secret_key
+        
+    - name: Change permission
+      run: |
+        chmod 600 secret_key
+
+    - name: Deploy
+      run: |
+        echo secret_key
         ssh -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null ${EC2_USER}@${EC2_HOST} -i secret_key "cd ~/kenshu-backend-laravel && git pull && sudo cp -r /home/ubuntu/kenshu-backend-laravel/backend/* /var/www/html"
