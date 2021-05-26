@@ -13,14 +13,14 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-    - name: Install SSH Key
-      uses: shimataro/ssh-key-action@v1
-      with:
-        private-key: ${{ secrets.SECRET_KEY }} 
-        known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
+    - name: Output SECRET_KEY
+      run: |
+        echo "$SECRET_KEY" > secret_key
+        
+    - name: Change permission
+      run: |
+        chmod 600 secret_key
 
-    - name: Adding Known Hosts
-      run: ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
-
-    - name: Deploy Action
-      run: ls
+    - name: Deploy
+      run: |
+        ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ${EC2_USER}@${EC2_HOST} -i secret_key "cd ~/kenshu-backend-laravel && git pull && sudo cp -r /home/ubuntu/kenshu-backend-laravel/backend/* /var/www/html"
