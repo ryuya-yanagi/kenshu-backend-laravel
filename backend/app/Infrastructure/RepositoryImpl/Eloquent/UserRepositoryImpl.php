@@ -21,7 +21,7 @@ class UserRepositoryImpl extends BaseRepositoryImpl implements UserRepository
 
     public function getList(): array
     {
-        $result = Cache::remember('users.index', 30, function () {
+        $result = Cache::remember('users.index', 100, function () {
             return $this->userEloquent->newQuery()->get()->toArray();
         });
 
