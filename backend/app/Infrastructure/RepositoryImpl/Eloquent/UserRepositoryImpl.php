@@ -6,6 +6,7 @@ use App\Domains\Entities\User as UserEntity;
 use App\Domains\Repositories\UserRepository;
 use App\Infrastructure\DataAccess\Eloquent\User as UserEloquent;
 use App\Infrastructure\RepositoryImpl\Eloquent\Traits\ConvertibleUserEntity;
+use Illuminate\Support\Facades\Cache;
 
 class UserRepositoryImpl extends BaseRepositoryImpl implements UserRepository
 {
@@ -20,7 +21,9 @@ class UserRepositoryImpl extends BaseRepositoryImpl implements UserRepository
 
     public function getList(): array
     {
-        $result = $this->userEloquent->newQuery()->get()->toArray();
+        $result = Cache::remember('users.index', 30, function () {
+            return $this->userEloquent->newQuery()->get()->toArray();
+        });
 
         return $this->toUserEntityCollection($result);
     }
